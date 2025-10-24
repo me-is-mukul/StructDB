@@ -41,6 +41,9 @@
 *.dwo
 
 # project shit
-/tree.png
-/tree.dot
+/binarytree.png
+/binarytree.dot
 /main
+/BTree.dot
+/BTree.png
+/.vscode
