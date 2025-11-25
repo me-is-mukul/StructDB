@@ -12,6 +12,7 @@ public:
     vector<string> bfs(const string&);
     vector<string> dfs(const string&);
     vector<string> shortestPath(const string&, const string&);
+    vector<string> getNeighbors(const string &node) const;
     void addPathFromCSV(const string& csvPath);
     void printGraph();
 

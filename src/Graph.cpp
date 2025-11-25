@@ -153,6 +153,15 @@ vector<string> Graph::shortestPath(const string &src, const string &dest)
     return path;
 }
 
+vector<string> Graph::getNeighbors(const string &node) const
+{
+    if (!adj.count(node)) 
+        return {};
+
+    return adj.at(node);
+}
+
+
 void Graph::printGraph()
 {
     for (auto &p : adj)
