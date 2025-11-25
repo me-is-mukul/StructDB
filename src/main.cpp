@@ -1,4 +1,6 @@
 #include "../include/Graph.h"
+#include "../include/MaxHeap.h"
+#include "../include/ProgressTracker.h"
 #include <iostream>
 #include <cstdlib>
 
@@ -14,7 +16,7 @@
 using namespace std;
 
 void printOptions(const string &current, const vector<string> &neighbors) {
-    cout << CLEAR; // clear screen
+    cout << CLEAR; 
     cout << BOLD << BLUE << "----------------------------------------\n";
     cout << "       Study Graph Navigation Menu      \n";
     cout << "----------------------------------------" << RESET << "\n\n";
@@ -34,6 +36,10 @@ void printOptions(const string &current, const vector<string> &neighbors) {
 
 int main() {
     Graph g;
+    MaxHeap mh;
+    ProgressTracker pt(g);
+
+
     g.addPathFromCSV("src/data.csv");
 
     cout << CLEAR;
@@ -56,13 +62,25 @@ int main() {
         vector<string> neighbors = g.getNeighbors(current);
 
         if (neighbors.empty()) {
-            cout << RED << "\nNo further paths from '" << current << "'.\n" << RESET;
-            break;
+            int wait;
+            cout << CYAN << "Now progress is 100%" << RESET << "\n";
+            string command = "./gemini \" ";
+            vector<string> list = g.shortestPath("start", current);
+            for (const auto &step : list) {
+                command += step + " ";
+            }
+            command += " write short 2 line info's about all these topics \"";
+            system(command.c_str());
+            cout<< GREEN << "\n press any number to restart: " << RESET << "\n";
+            cin>>wait;
+            current = "start";
+            continue;
         }
 
         printOptions(current, neighbors);
 
         string option;
+        cout << CYAN << "\nCurrent progress : " << 100-pt.computeProgress(current) << "%\n" << RESET;
         cout << "> ";
         cin >> option;
 
@@ -71,7 +89,6 @@ int main() {
             break;
         }
 
-        // Check if user entered a number
         bool isNum = all_of(option.begin(), option.end(), ::isdigit);
 
         if (isNum) {
@@ -86,7 +103,6 @@ int main() {
             }
         }
 
-        // If user entered name directly
         auto it = find(neighbors.begin(), neighbors.end(), option);
         if (it != neighbors.end()) {
             current = option;

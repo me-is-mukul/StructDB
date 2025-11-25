@@ -1,2 +1,8 @@
 *.exe
 test.cpp
+.env
+.vscode/
+build/
+.DS_Store
+app
+gemini
