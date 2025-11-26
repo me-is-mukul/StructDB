@@ -61,6 +61,14 @@ int main() {
     while (true) {
         vector<string> neighbors = g.getNeighbors(current);
 
+        sort(neighbors.begin(), neighbors.end(),
+             [&](const string &a, const string &b) {
+                 int fa = mh.getFrequency(a);
+                 int fb = mh.getFrequency(b);
+                 if (fa != fb) return fa > fb;     // higher frequency first
+                 return a < b;                      // tie-breaker: alphabetical
+             });
+
         if (neighbors.empty()) {
             int wait;
             cout << CYAN << "Now progress is 100%" << RESET << "\n";
@@ -95,6 +103,7 @@ int main() {
             int idx = stoi(option);
             if (idx >= 1 && idx <= (int)neighbors.size()) {
                 current = neighbors[idx - 1];
+                mh.accessTopic(current);
                 continue;
             } else {
                 cout << RED << "\nInvalid choice. Try again.\n" << RESET;
@@ -106,6 +115,7 @@ int main() {
         auto it = find(neighbors.begin(), neighbors.end(), option);
         if (it != neighbors.end()) {
             current = option;
+            mh.accessTopic(current);   // record access when user types the topic name
             continue;
         }
 
