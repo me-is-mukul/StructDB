@@ -15,7 +15,7 @@ void Graph::addPathFromCSV(const string &csvPath)
         if (line.empty()) continue;
 
         vector<string> tokens;
-        tokens.push_back("start");   // prepend start node
+        tokens.push_back("start");   
 
         stringstream ss(line);
         string item;
@@ -43,14 +43,14 @@ void Graph::addPath(const vector<string> &path)
         const string &u = path[i];
         const string &v = path[i + 1];
 
-        // ensure node exists
+
         if (!adj.count(u)) adj[u] = {};
         if (!adj.count(v)) adj[v] = {};
 
-        // check if edge u → v already exists
+
         auto &nbrs = adj[u];
         if (find(nbrs.begin(), nbrs.end(), v) == nbrs.end()) {
-            nbrs.push_back(v);   // only add if it's new
+            nbrs.push_back(v);
         }
     }
 }

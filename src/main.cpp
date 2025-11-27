@@ -65,8 +65,8 @@ int main() {
              [&](const string &a, const string &b) {
                  int fa = mh.getFrequency(a);
                  int fb = mh.getFrequency(b);
-                 if (fa != fb) return fa > fb;     // higher frequency first
-                 return a < b;                      // tie-breaker: alphabetical
+                 if (fa != fb) return fa > fb;     
+                 return a < b;                     
              });
 
         if (neighbors.empty()) {
@@ -115,7 +115,7 @@ int main() {
         auto it = find(neighbors.begin(), neighbors.end(), option);
         if (it != neighbors.end()) {
             current = option;
-            mh.accessTopic(current);   // record access when user types the topic name
+            mh.accessTopic(current);  
             continue;
         }
 

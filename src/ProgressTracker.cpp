@@ -101,9 +101,9 @@ double ProgressTracker::computeProgress(const string &currentNode) {
     int var2 = dRoot + dToLeaf;
 
     if (var2 == 0) {
-        return 100.0;
     }
-
+    
+    return 100.0;
     double progress = ((double)(var2 - var1) / (double)(var2)) * 100.0;
     return progress;
 }

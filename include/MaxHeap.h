@@ -6,10 +6,10 @@ using namespace std;
 
 class MaxHeap {
 private:
-    // Pair: (topicName, accessCount)
+    
     vector<pair<string, int>> heap;
-    unordered_map<string, int> freq;        // topic -> access count
-    unordered_map<string, int> heapIndex;   // topic -> index in heap
+    unordered_map<string, int> freq;
+    unordered_map<string, int> heapIndex;
 
     void heapifyUp(int index);
     void heapifyDown(int index);
@@ -18,10 +18,10 @@ private:
 public:
     MaxHeap() = default;
 
-    void accessTopic(const string& topic);        // Increment topic usage
-    vector<pair<string, int>> getTopN(int n) const; // Get top N topics
-    int getFrequency(const string& topic) const; // Get access count of topic
-    void printHeap() const;                     // Show heap content
+    void accessTopic(const string& topic);
+    vector<pair<string, int>> getTopN(int n) const;
+    int getFrequency(const string& topic) const;
+    void printHeap() const;
 };
 
 #endif
